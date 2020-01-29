@@ -1,7 +1,5 @@
 'use strict'
 
-const fsStore = require('cache-manager-fs')
-
 module.exports = {
   pkg: {
     name: require('../../package').name + '-test'

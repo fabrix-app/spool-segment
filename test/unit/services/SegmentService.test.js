@@ -13,7 +13,22 @@ describe('api.services.SegmentService', () => {
     // return SegmentService.init()
   })
 
-  describe('Segment', () => {
-
+  describe('SegmentService', () => {
+    it('should track', (done) => {
+      SegmentService.track({
+        anonymousId: 'spool-segment-1',
+        event: 'Test Track',
+        properties: {
+          revenue: 39.95,
+          shippingMethod: '2-day'
+        }
+      })
+        .then(res => {
+          done()
+        })
+        .catch(err => {
+          done(err)
+        })
+    })
   })
 })

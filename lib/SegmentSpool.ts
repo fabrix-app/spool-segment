@@ -54,6 +54,7 @@ export class SegmentSpool extends ExtensionSpool {
    */
   async configure() {
     this.segment = Segment.config(this.app)
+
     return
   }
 
