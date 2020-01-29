@@ -21,12 +21,13 @@ export const Segment = {
 
     const analytics = new Analytics(key, options)
 
+    // TODO
     // Emit on Fabrix when a flush happens
-    analytics.watch('flushed', (id, oldVal?, newVal?) => {
-      if (oldVal && oldVal !== newVal) {
-        app.emit('spool.segment.flushed', 'segment.' + id + ' changed from ' + oldVal + ' to ' + newVal)
-      }
-    })
+    // analytics.watch('flushed', (id, oldVal?, newVal?) => {
+    //   if (oldVal && oldVal !== newVal) {
+    //     app.emit('spool:segment:flushed', 'segment.' + id + ' changed from ' + oldVal + ' to ' + newVal)
+    //   }
+    // })
 
     return analytics
   },
@@ -46,7 +47,7 @@ export const Segment = {
    */
   unload: (app: FabrixApp) => {
     return new Promise((resolve, reject) => {
-      if (app && app.segment) {
+      if (app && app.segment && typeof app.segment.flush === 'function') {
         app.segment.flush((err?) => {
           if (err) {
             return reject(err)

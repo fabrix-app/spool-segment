@@ -13,6 +13,8 @@ Implements [Segment](https://segment.io) as a Fabrix spool
 
 [Analytics.js](https://segment.com/docs/connections/sources/catalog/libraries/server/node-js/)
 
+This spool watches the segment flush property and will emit a fabrix event (`spool:segment:flushed`) when a flush happens.  It will also flush the segment que when unloaded to prevent data loss. 
+
 ## Install
 ```sh
 $ npm install --save @fabrix/spool-segment
@@ -33,17 +35,43 @@ export const main = {
 
 ## Configuration
 
-```
-
+```js
+ // config/segment.ts
+export const segment = {
+  write_key: '<YOUR WRITE KEY>',
+  flush_at: 1,
+  flush_interval: 1000
+}
 ```
 
 For more information about segment (type and configuration) please see the segment documentation.
 
 ## Usage
 
-```JavaScript
+```js
+const data = {...}
+
+// You can use the extension directly...
+this.app.segment.track(data)
+
+// Or as a Promise from the SegmentService...
+return this.app.services.SegmentService.track(data)
 
 ```
+
+### SegmentService Methods
+
+#### Identify
+
+#### Track
+
+#### Page
+
+#### Group
+
+#### Alias
+
+#### Flush
 
 [npm-image]: https://img.shields.io/npm/v/@fabrix/spool-segment.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@fabrix/spool-segment
